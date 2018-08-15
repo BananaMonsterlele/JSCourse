@@ -1,6 +1,6 @@
-/*let time, 
+let time, 
 	hours, 
-	miutes, 
+	minutes, 
 	seconds,
 	days,
 	months,
@@ -60,17 +60,15 @@ function WeekDay(){
         	alert('Суббота');
         	break;
         default: 
-        	alert('Are you durak?');
+        	alert('');
         	break;
     }
 }
-*/
+
 
 let input1 = document.getElementById('input1'),
 	input2 = document.getElementById('input2'),
 	input3 = document.getElementById('input3'),
-	btn1 = document.getElementById('btn1'),
-	btn2 = document.getElementById('btn2'),
 	date1,
 	date2;
 

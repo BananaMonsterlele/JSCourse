@@ -12,5 +12,4 @@ let openBtn = document.getElementById('open-btn'),
 	time = document.querySelector('.time-value'),
 	countBudget = document.querySelector('.count-budget-value'),
 	hireEmp = document.querySelectorAll('.hire-employers-item');
-console.log(hireEmp);
 
