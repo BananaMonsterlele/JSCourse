@@ -1,0 +1,15 @@
+let openBtn = document.getElementById('open-btn'),
+	shopName = document.getElementsByClassName('name-value')[0],
+	budget = document.getElementsByClassName('budget-value')[0],
+	goods = document.getElementsByClassName('goods-value')[0],
+	items = document.getElementsByClassName('items-value')[0],
+	emp = document.getElementsByClassName('employers-value')[0],
+	discount = document.getElementsByClassName('discount-value')[0],
+	isOpen = document.getElementsByClassName('isopen-value')[0],
+	goodsItems = document.getElementsByClassName('goods-item'),
+	btns = document.getElementsByTagName('button'),
+	chooseItems = document.querySelector('.choose-item'),
+	time = document.querySelector('.time-value'),
+	countBudget = document.querySelector('.count-budget-value'),
+	hireEmp = document.querySelectorAll('.hire-employers-item');
+

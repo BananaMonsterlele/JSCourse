@@ -1,4 +1,4 @@
-let menuList = document.getElementsByClassName('menu-item');
+let menuList = document.getElementsByClassName('menu-item'),
 	menu = document.getElementById('menu'),
 	menuItem = document.createElement('div'),
 	col = document.body.children[2],
