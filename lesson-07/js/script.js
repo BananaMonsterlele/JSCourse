@@ -129,13 +129,9 @@ hireEmp[2].addEventListener('change', () => {
 
 
 empBtn.addEventListener('click', () => {
+    empValue.textContent = '';
     for (let i = 0; i < hireEmp.length; i++) {
         let empName = hireEmp[i].value;
-        // if(hireEmp == s ){
-        //     empBtn.disabled = true;
-        // } else {
-        //     empBtn.disabled = false;
-        // }
         mainList.employers[i] = ' ' + empName;
 
         empValue.textContent += mainList.employers[i] + ',';
