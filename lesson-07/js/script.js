@@ -27,7 +27,7 @@ openBtn.addEventListener('click', () => {
 
         while(isNaN(monthBudget) ||  monthBudget == '' || monthBudget == null) {
             monthBudget = prompt("Ваш бюджет на месяц", "50000");
-        };
+        }
         budget.textContent = monthBudget;
         shopNameValue.textContent = prompt("Название вашего магазина", "FunnyShop").toUpperCase();    
         discountSystem();
@@ -48,7 +48,7 @@ goodsItems[1].addEventListener('change', () => {
     goodsBtn.disabled = false;  
 });
 goodsItems[2].addEventListener('change', () => {
-    goodsBtn.disabled = false;  
+    goodsBtn.disabled = false; 
 });
 goodsItems[3].addEventListener('change', () => {
     goodsBtn.disabled = false;  
@@ -97,7 +97,7 @@ timeValue.addEventListener('change', () => {
             } else {
                 console.log('There are only 24 hours in a day!');
                 mainList.open = false;
-            };
+            }
 
     if( mainList.open == true){
         isOpenValue.style.backgroundColor = 'green';
@@ -141,9 +141,6 @@ empBtn.addEventListener('click', () => {
         empValue.textContent += mainList.employers[i] + ',';
     }
 });
-function proverka(countBudget) {
-    countBudget.value = countBudget.value.replace(/[^\d]/g, '');
-};
 
 function discountSystem(){
     if(Number(monthBudget) < 1000){
