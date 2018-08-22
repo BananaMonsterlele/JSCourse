@@ -9,8 +9,21 @@
   <body>
 <div class="fullscreen-bg">
     <div class="overlay">
+        <div class="container"> 
+            <div class="os-phrases" id="os-phrases">
+                <h2>Иногда лучше</h2>
+                <h2>Не заморачиваться с анимацией</h2>
+                <h2>Ведь это может</h2>
+                <h2>Затянуться на долгое</h2>
+                <h2>Долгое время</h2>
+                <h2>Которое мы могли бы</h2>
+                <h2>Уделить важным вещам</h2>
+                <h2>Но не в этот раз</h2>
+            </div>
+        </div><!-- /container -->
+        
         <div class="open">
-            <button class="open-btn" id="open-btn">Открыть магазин</button>
+            <button class="open-btn" id="open-btn"><span>Открыть магазин</span></button>
         </div>
         <div class="main">
             <div class="main-info">
@@ -41,7 +54,7 @@
                 <input class="goods-item" type="text" id="goods_2">
                 <input class="goods-item" type="text" id="goods_3">
                 <input class="goods-item" type="text" id="goods_4">
-                <button class="goods-item-btn">Утвердить</button>
+                <button class="goods-item-btn button">Утвердить</button>
 
                 <div class="choose-items">Введите продукты через запятую</div>
                 <input class="choose-item" type="text" id="items">
@@ -51,13 +64,13 @@
 
                 <div class="count-budget">Расчет дневного бюджета</div>
                 <input class="count-budget-value" type="text" id="budget" disabled="">
-                <button class="count-budget-btn">Рассчитать</button>
+                <button class="count-budget-btn button">Рассчитать</button>
 
                 <div class="hire-employers">Имена сотрудников</div>
                 <input class="hire-employers-item" type="text" id="employers_1" onBlur='this.value=this.value.replace(/[^\йцукенгшщзхъфывапролджэячсмитьбюЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ]/ig,"");' onkeyup='this.value=this.value.replace(/[^\йцукенгшщзхъфывапролджэячсмитьбюЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ]/ig,"");'>
                 <input class="hire-employers-item" type="text" id="employers_2" onBlur='this.value=this.value.replace(/[^\йцукенгшщзхъфывапролджэячсмитьбюЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ]/ig,"");' onkeyup='this.value=this.value.replace(/[^\йцукенгшщзхъфывапролджэячсмитьбюЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ]/ig,"");'>
                 <input class="hire-employers-item" type="text" id="employers_3" onBlur='this.value=this.value.replace(/[^\йцукенгшщзхъфывапролджэячсмитьбюЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ]/ig,"");' onkeyup='this.value=this.value.replace(/[^\йцукенгшщзхъфывапролджэячсмитьбюЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ]/ig,"");'>
-                <button class="hire-employers-btn">Нанять</button>
+                <button class="hire-employers-btn button">Нанять</button>
             </div>
         </div>
     </div> 
@@ -68,7 +81,13 @@
 </div>
 
 	<link rel="stylesheet" href="css/style.css">
-
-	<script  src="js/script.js">	</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="js/jquery.lettering.js"></script>
+        <script>
+            $(document).ready(function() {
+                $("#os-phrases > h2").lettering('words').children("span").lettering().children("span").lettering(); 
+            })
+        </script>
+	<script  src="js/script.js"></script>
   </body>
 </html>
