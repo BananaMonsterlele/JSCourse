@@ -100,59 +100,55 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	// smooth scrolling
 
-	// let contacts = document.getElementsByClassName('contacts');
+		(function(){ // Code in a function to create an isolate scope
 
+		let speed = 500,
+			moving_frequency = 15, 
+			links = document.querySelectorAll('li a'),
+			href;
 
-	// for(let i = 0; i < contacts.length; i++){
+		for(let i=0; i<links.length; i++)
+		{   
+		    href = (links[i].attributes.href === undefined) ? null : links[i].attributes.href.nodeValue.toString();
+		    if(href !== null && href.length > 1 && href.substr(0, 1) == '#'){  
+		        links[i].onclick = function(){
+		            let element;
+		            let href = this.attributes.href.nodeValue.toString();
+		            element = document.getElementById(href.substr(1));
+		                let hop_count = speed/moving_frequency;
+		                let getScrollTopDocumentAtBegin = getScrollTopDocument();
+		                let gap = (getScrollTopElement(element) - getScrollTopDocumentAtBegin) / hop_count;
 
-	// 	let href = contacts[i].getAttribute('href');
+		                for(let i = 1; i <= hop_count; i++){
+		                    (function() {
+		                        let hop_top_position = gap*i;
+		                        setTimeout(function(){  window.scrollTo(0, hop_top_position + getScrollTopDocumentAtBegin); }, moving_frequency*i);
+		                    })();
+		                }
+		            
 
-	// 	contacts[i].addEventListener('click', () => {
-	// 		function scrollTo(element, to, duration) {
-	// 		    if (duration <= 0) return;
-	// 		    var difference = to - element.scrollTop;
-	// 		    var perTick = difference / duration * 10;
+		            return false;
+		        };
+		    }
+		}
 
-	// 		    setTimeout(function() {
-	// 		        element.scrollTop = element.scrollTop + perTick;
-	// 		        if (element.scrollTop === to) return;
-	// 		        scrollTo(element, to, duration - 10);
-	// 		    }, 10);
-	// 		}
-	// 		scrollTo(contacts[i], href, 10000)
-	// 	})
-	// }
-	// собираем все якоря; устанавливаем время анимации и количество кадров
-	const anchors = [].slice.call(document.querySelectorAll('a[href*="#"]')),
-	      animationTime = 1000,
-	      framesCount = 40;
+		let getScrollTopElement =  function (e)
+		{
+		    let top = 0;
 
-	anchors.forEach(function(item) {
-	  // каждому якорю присваиваем обработчик события
-	  item.addEventListener('click', function(e) {
-	    // убираем стандартное поведение
-	    e.preventDefault();
-	    
-	    // для каждого якоря берем соответствующий ему элемент и определяем его координату Y
-	    let coordY = document.querySelector(item.getAttribute('href')).getBoundingClientRect().top;
-	    
-	    // запускаем интервал, в котором
-	    let scroller = setInterval(function() {
-	      // считаем на сколько скроллить за 1 такт
-	      let scrollBy = coordY / framesCount;
-	      
-	      // если к-во пикселей для скролла за 1 такт больше расстояния до элемента
-	      // и дно страницы не достигнуто
-	      if(scrollBy > window.pageYOffset - coordY && window.innerHeight + window.pageYOffset < document.body.offsetHeight) {
-	        // то скроллим на к-во пикселей, которое соответствует одному такту
-	        window.scrollBy(0, scrollBy);
-	      } else {
-	        // иначе добираемся до элемента и выходим из интервала
-	        window.scrollTo(0, coordY);
-	        clearInterval(scroller);
-	      }
-	    // время интервала равняется частному от времени анимации и к-ва кадров
-	    }, animationTime / framesCount);
-	  });
-	});
+		    while (e.offsetParent != undefined && e.offsetParent != null)
+		    {
+		        top += e.offsetTop + (e.clientTop != null ? e.clientTop : 0);
+		        e = e.offsetParent;
+		    }
+
+		    return top;
+		};
+
+		let getScrollTopDocument = function()
+		{
+		    return document.documentElement.scrollTop + document.body.scrollTop;
+		};
+
+	})();
 })

@@ -37,7 +37,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 // Timer
 
-	let deadline = '2018-08-22';
+	let deadline = '2018-08-24';
 
 	function getTimeRemaining (endTime) {
 		let t = Date.parse(endTime) - Date.parse(new Date()),
@@ -60,23 +60,26 @@ window.addEventListener('DOMContentLoaded', () => {
 			minutes = timer.querySelector('.minutes'),
 			seconds= timer.querySelector('.seconds');
 
-		let timeInterval = setInterval(updateClock, 1000);	
+		
 
 		function updateClock () {
 			let t = getTimeRemaining(endTime);
 
-			if(Number(t.hours) < 10){
-				t.hours = '0' + t.hours;
-			} else if(Number(t.minutes) < 10){
-				t.minutes = '0' + t.minutes;
-			} else if(Number(t.seconds) < 10){
-				t.seconds = '0' + t.seconds;
+			hours.innerHTML = t.hours;
+			if(hours.innerHTML < 10){
+				hours.innerHTML = '0' + hours.innerHTML;
+			}
+			
+			minutes.innerHTML = t.minutes;
+			if(minutes.innerHTML < 10){
+				minutes.innerHTML = '0' + minutes.innerHTML;
 			}
 
-			hours.innerHTML = t.hours;
-			minutes.innerHTML = t.minutes;
 			seconds.innerHTML = t.seconds;
-
+			if(seconds.innerHTML < 10){
+				seconds.innerHTML = '0' + seconds.innerHTML;
+			}
+		let timeInterval = setInterval(updateClock, 1000);	
 			if(t.total <= 0){
 				clearInterval(timeInterval);
 				hours.innerHTML = '0' + '0';
