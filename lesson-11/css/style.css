@@ -6,14 +6,14 @@
   -webkit-animation-name: fade;
   -webkit-animation-duration: 2.5s;
 }
-/*@-webkit-keyframes slide_down {
+@-webkit-keyframes slide_down {
         from {
           margin-top: -200px;
         }
         to {
           margin-top: 0px
         }
-}*/
+}
 @keyframes slide_down {
         from {
           margin-top: -200px;
