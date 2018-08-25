@@ -1,3 +1,7 @@
+// require("../node_modules/babel-polyfill/dist/polyfill.min.js");
+
+// import ('../node_modules/babel-polyfill/dist/polyfill.min.js');
+
 window.addEventListener('DOMContentLoaded', () => {
 
 // Tabs	
@@ -5,7 +9,6 @@ window.addEventListener('DOMContentLoaded', () => {
 	let tab = document.getElementsByClassName('info-header-tab'),
 		tabContent = document.getElementsByClassName('info-tabcontent'),
 		info = document.getElementsByClassName('info-header')[0];
-
 	function hideTabContent (a) {
 			for(let i = a; i < tabContent.length; i++){
 				tabContent[i].classList.remove('show');
@@ -37,7 +40,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 // Timer
 
-	let deadline = '2018-08-25';
+	let deadline = '2018-10-31';
 
 	function getTimeRemaining (endTime) {
 		let t = Date.parse(endTime) - Date.parse(new Date()),
@@ -188,6 +191,34 @@ window.addEventListener('DOMContentLoaded', () => {
 	});
 	}	
 
+// Popup animation
+	let browser = detect.parse(navigator.userAgent),
+		animationStartBtn = document.querySelector('.more'),
+		popup = document.querySelector('.popup');
+		
+	if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+		alert('Sorre, Вы зашли с мобилки и никакой анимации не будет...')
+	} else {
+		if(browser.browser.family == 'IE' || browser.browser.family == 'Edge'){
+			popup.style.cssText = `animation: slide_down 2s cubic-bezier(.51,-0.24,.89,1.83);`;
+		} else {
+			animationStartBtn.onclick = function(){
+				let marginLeft = -200,
+					marginTop = -200,
+					animation = setInterval(appear, 10);
+				function appear(){
+					if(marginLeft == 0){
+						clearInterval(animation);
+					} else {
+						marginLeft = marginLeft + 1;
+						marginTop = marginTop + 1;
+						popup.style.cssText = `margin-left: ${marginLeft}px; margin-top: ${marginTop}px`;
+					}
+				}
+			}
+		}
+	}	
+
 
 // Class
 
@@ -240,39 +271,55 @@ window.addEventListener('DOMContentLoaded', () => {
 
 			// AJAX
 
-			let request = new XMLHttpRequest();
-
-			request.open("POST", "../server.php");
-			request.setRequestHeader("Content-Type", "application/x-www-form-urlendcoded");
-
 			let formData = new FormData(form);
 
-			request.send(formData);
-			request.onreadystatechange = function(){
-				if (request.readyState < 4){
-					statusMessage.innerHTML = message.loading;
-				} else if(request.readyState === 4){
-					if(request.status == 200 && request.status < 300){
-						statusMessage.innerHTML = '<img src="img/success.png" alt="Success">';
-						statusMessage.style.cssText = 'text-align: center; margin-top: 15px';
-						setInterval(function(){
-							statusMessage.style.cssText = 'display:none';
-						}, 1000);
-						// Добавляем контент на страницу
-					}
-					else {
-						statusMessage.innerHTML = message.failure;
-					}
-				}
-			};
-			for(let i = 0; i < input.length; i++){
-				input[i].value = '';
-				// Очищаем поля ввода
+			function postData(Data){
+				return new Promise(function(resolve,reject){
+					let request = new XMLHttpRequest();
+
+					request.open("POST", "../server.php");
+					request.setRequestHeader("Content-Type", "application/x-www-form-urlendcoded");
+
+					request.onreadystatechange = function(){
+						if (request.readyState < 4){
+							resolve()
+						} else if(request.readyState === 4){
+							if(request.status == 200 && request.status < 300){
+								resolve()
+								// Добавляем контент на страницу
+							}
+							else {
+								reject()
+							}
+						}
+					};
+
+					request.send(Data);
+				})
 			}
+
+			function clearInput(){
+				for(let i = 0; i < input.length; i++){
+					input[i].value = '';
+					// Очищаем поля ввода
+				}
+			}
+
+			postData(formData)
+							.then(() => statusMessage.innerHTML = message.loading)
+							.then(() => {
+								statusMessage.innerHTML = '<img src="img/success.png" alt="Success">';
+								statusMessage.style.cssText = 'text-align: center; margin-top: 15px';
+								setInterval(function(){
+									statusMessage.style.cssText = 'display:none';
+								}, 1000);
+							})
+							.catch(() => statusMessage.innerHTML = message.failure)
+							.then(clearInput)
+
 		});	
 	}
 
-// Main Form
 	
 
 });
