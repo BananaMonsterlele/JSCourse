@@ -194,12 +194,12 @@ window.addEventListener('DOMContentLoaded', () => {
 		popup = document.querySelector('.popup');
 		
 	if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-		alert('Sorre, Вы зашли с мобилки и никакой анимации не будет...')
+		alert('Sorre, Вы зашли с мобилки и никакой анимации не будет...');
 	} else {
 		if(browser.browser.family == 'IE' && browser.browser.family == 'Edge'){
 			animationStartBtn.onclick = function () {
 				popup.style.cssText = '-webkit-animation: slide_down 2s cubic-bezier(.51,-0.24,.89,1.83);-o-animation: slide_down 2s cubic-bezier(.51,-0.24,.89,1.83);animation: slide_down 2s cubic-bezier(.51,-0.24,.89,1.83);';
-			}
+			};
 		} else {
 			animationStartBtn.onclick = function(){
 				let marginLeft = -200,
@@ -214,7 +214,7 @@ window.addEventListener('DOMContentLoaded', () => {
 						popup.style.cssText = `margin-left: ${marginLeft}px; margin-top: ${marginTop}px`;
 					}
 				}
-			}
+			};
 		}
 	}	
 
@@ -281,20 +281,20 @@ window.addEventListener('DOMContentLoaded', () => {
 
 					request.onreadystatechange = function(){
 						if (request.readyState < 4){
-							resolve()
+							resolve();
 						} else if(request.readyState === 4){
 							if(request.status == 200 && request.status < 300){
-								resolve()
+								resolve();
 								// Добавляем контент на страницу
 							}
 							else {
-								reject()
+								reject();
 							}
 						}
 					};
 
 					request.send(Data);
-				})
+				});
 			}
 
 			function clearInput(){
@@ -314,7 +314,7 @@ window.addEventListener('DOMContentLoaded', () => {
 								}, 1000);
 							})
 							.catch(() => statusMessage.innerHTML = message.failure)
-							.then(clearInput)
+							.then(clearInput);
 
 		});	
 	}
@@ -360,28 +360,28 @@ window.addEventListener('DOMContentLoaded', () => {
 		plusSlides(-1);
 		slides[slideIndex - 1].style.cssText = `
 			animation: slide-from-right 2s; 
-		`
-		wrap.style.cssText = `overflow-x: hidden`
-	})
+		`;
+		wrap.style.cssText = `overflow-x: hidden`;
+	});
 	next.addEventListener('click', function(){
 		plusSlides(1);
 		slides[slideIndex - 1].style.cssText = `
 			animation: slide-from-left 2s; 
-		`
-		wrap.style.cssText = `overflow-x: hidden`
-	})
+		`;
+		wrap.style.cssText = `overflow-x: hidden`;
+	});
 
 	function currentSlide (n) {
-		showSlides(slideIndex = n)
+		showSlides(slideIndex = n);
 	}
 
 	dotsWrap,addEventListener('click', function(event){
 		for(let i = 0; i < dots.length + 1; i++){
 			if(event.target.classList.contains('dot') && event.target == dots[i-1]){
 				currentSlide(i);
-			}
+			} 
 		}
-	})
+	});
 
 	// Calculator
 
@@ -396,11 +396,11 @@ window.addEventListener('DOMContentLoaded', () => {
 	totalValue.innerHTML = '0';
 
 	persons.onkeyup = function() {
-		this.value = this.value.replace( /\D/g, "")
-	}
+		this.value = this.value.replace( /\D/g, "");
+	};
 	restDays.onkeyup = function() {
-  		this.value = this.value.replace( /\D/g, "")
-	}
+  		this.value = this.value.replace( /\D/g, "");
+	};
 	
 	persons.addEventListener('change', function(){
 		personSum = +this.value;
@@ -417,7 +417,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				}, 500);
 			}
 		} 
-	})
+	});
 	restDays.addEventListener('change', function(){
 		daySum = +this.value;
 		total = (daySum + personSum) * 40000;
@@ -433,7 +433,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				}, 500);
 			}
 		}
-	})	
+	});	
 
 	place.addEventListener('change', function(){
 		if(restDays.value == '' || persons.value == ''){
