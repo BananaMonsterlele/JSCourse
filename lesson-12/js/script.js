@@ -396,7 +396,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		if(restDays.value == ''){
 			totalValue.innerHTML = '0';
 		} else {
-			scroll(total,'total',10,60);
+			scroll(total,'total',5,150);
 		} 
 	});
 	restDays.addEventListener('change', function(){
@@ -414,7 +414,8 @@ window.addEventListener('DOMContentLoaded', () => {
 			totalValue.innerHTML = '0';
 		} else {
 			let a = total;
-			totalValue.innerHTML = a * this.options[this.selectedIndex].value;
+			a = a * this.options[this.selectedIndex].value;
+			scroll(a,'total',5,150);
 		}
 	
 
