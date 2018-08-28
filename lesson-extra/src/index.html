@@ -7,9 +7,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700&amp;subset=cyrillic-ext" rel="stylesheet">
 	<link rel="stylesheet" href="css/bootstrap-grid.min.css">
 	<link rel="stylesheet" href="css/style.css">
-	<script>
-		import "babel-polyfill";
-	</script>
+
 </head>
 <body>
 	<header>
@@ -233,8 +231,11 @@
 					</div>
 	 		</div>
 	</div>
+	<!-- <script src="../node_modules/@babel/polyfill/dist/polyfill.js"></script> -->
+	<script src="../node_modules/@babel/polyfill/dist/polyfill.js"></script>
+
 	<script src="frameworks/detect.js"></script>
-	<script src="js/script.js"></script>
+	<script src="js/bundle.js"></script>
 	
 	<!-- <script>
 		let IE = detect.parse(navigator.userAgent);
