@@ -176,17 +176,18 @@ window.addEventListener('DOMContentLoaded', () => {
 		overlay = document.querySelector('.overlay'),
 		close = document.querySelector('.popup-close'); 
 
-	more.addEventListener('click', function  () {
-		this.classList.add('more-splash');
-		overlay.style.display = 'block';
-		document.body.style.overflow = 'hidden';
-	});	
-	close.addEventListener('click', () => {
-		overlay.style.display = 'none';
-		more.classList.remove('more-splash');
-		document.body.style.overflow = '';
-	});
+		more.addEventListener('click', function  () {
+			this.classList.add('more-splash');
+			overlay.style.display = 'block';
+			document.body.style.overflow = 'hidden';
+		});	
+		close.addEventListener('click', () => {
+			overlay.style.display = 'none';
+			more.classList.remove('more-splash');
+			document.body.style.overflow = '';
+		});
 	}	
+
 
 // Popup animation
 	let browser = detect.parse(navigator.userAgent),
