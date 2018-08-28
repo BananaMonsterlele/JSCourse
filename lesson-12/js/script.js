@@ -98,57 +98,29 @@ window.addEventListener('DOMContentLoaded', () => {
 
 // Smooth scrolling
 
-	(function(){ // Code in a function to create an isolate scope
+	function animate (draw, duration) {
+		let start = performance.now();
 
-	let speed = 500,
-		moving_frequency = 15, 
-		links = document.querySelectorAll('li a'),
-		href;
-
-	for(let i=0; i<links.length; i++)
-	{   
-	    href = (links[i].attributes.href === undefined) ? null : links[i].attributes.href.nodeValue.toString();
-	    if(href !== null && href.length > 1 && href.substr(0, 1) == '#'){  
-	        links[i].onclick = function(){
-	            let element;
-	            let href = this.attributes.href.nodeValue.toString();
-	            element = document.getElementById(href.substr(1));
-	                let hop_count = speed/moving_frequency;
-	                let getScrollTopDocumentAtBegin = getScrollTopDocument();
-	                let gap = (getScrollTopElement(element) - getScrollTopDocumentAtBegin) / hop_count;
-
-	                for(let i = 1; i <= hop_count; i++){
-	                    (function() {
-	                        let hop_top_position = gap*i;
-	                        setTimeout(function(){  window.scrollTo(0, hop_top_position + getScrollTopDocumentAtBegin); }, moving_frequency*i);
-	                    })();
-	                }
-	            
-
-	            return false;
-	        };
-	    }
+		requestAnimationFrame(function animate(time){
+			let timePassed = time - start;
+			if(timePassed > duration) timePassed = duration;
+			draw(timePassed);
+			if(timePassed < duration){
+				requestAnimationFrame(animate); 
+			} 
+		})
 	}
 
-	let getScrollTopElement =  function (e)
-	{
-	    let top = 0;
+	let nav = document.querySelector('nav');
 
-	    while (e.offsetParent != undefined && e.offsetParent != null)
-	    {
-	        top += e.offsetTop + (e.clientTop != null ? e.clientTop : 0);
-	        e = e.offsetParent;
-	    }
-
-	    return top;
-	};
-
-	let getScrollTopDocument = function()
-	{
-	    return document.documentElement.scrollTop + document.body.scrollTop;
-	};
-
-})();
+	nav.addEventListener('click', function  (event) {
+		event.preventDefault();
+		animate(function(timePassed){
+			let target = event.target,
+				section = document.getElementById(target.getAttribute('href').slice(1));
+			window.scrollBy(0, section.getBoundingClientRect().top / 20 - 3)		
+		}, 1200)
+	})
 
 
 // Modal showing for timer
@@ -394,6 +366,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		daySum = 0,
 		total = 0;
 
+
 	totalValue.innerHTML = '0';
 
 	persons.onkeyup = function() {
@@ -402,37 +375,37 @@ window.addEventListener('DOMContentLoaded', () => {
 	restDays.onkeyup = function() {
   		this.value = this.value.replace( /\D/g, "");
 	};
+	function scroll(val,el,timeout,step){
+	var i=0;
+	(function(){
+	if(i<=val){
+	setTimeout(arguments.callee,timeout);
+	document.getElementById(el).innerHTML=i;
+	i=i+step;
+	}else{
+	document.getElementById(el).innerHTML=val;
+	}
+	})();
+	}
+	 
+	
 	
 	persons.addEventListener('change', function(){
 		personSum = +this.value;
-		total = (daySum + personSum) * 40000;
+		total = (daySum + personSum) * 4000;
 		if(restDays.value == ''){
 			totalValue.innerHTML = '0';
 		} else {
-			for(let i = 0; i <= total; i += 2){
-				let numberAnim = setInterval(function(){
-					totalValue.textContent = i;
-					if(i = total){
-						clearInterval(numberAnim);
-					}
-				}, 500);
-			}
+			scroll(total,'total',10,60);
 		} 
 	});
 	restDays.addEventListener('change', function(){
 		daySum = +this.value;
-		total = (daySum + personSum) * 40000;
+		total = (daySum + personSum) * 4000;
 		if(persons.value == ''){
 			totalValue.innerHTML = '0';
 		} else {
-			for(let i = 0; i <= total; i += 2){
-				let numberAnim = setInterval(function(){
-					totalValue.textContent = i;
-					if(i = total){
-						clearInterval(numberAnim);
-					}
-				}, 500);
-			}
+			scroll(total,'total',5,150);
 		}
 	});	
 

@@ -8,37 +8,41 @@
 }
 @keyframes slide-from-right {
   from {
-    margin-right: -100px;
+    
+    opacity: 0.1;
   }
   to {
-    margin-right: 0;
+    
+    opacity: 1;
   }
 }
 @keyframes slide-from-left {
   from {
-    margin-left: -100px;
+    
     opacity: 0.1;
   }
   to {
-    margin-left: 0;
+    
     opacity: 1;
   }
 }
 @-webkit-keyframes slide-from-right {
   from {
-    margin-right: -100px;
+    
+    opacity: 0.1;
   }
   to {
-    margin-right: 0;
+    
+    opacity: 1;
   }
 }
 @-webkit-keyframes slide-from-left {
   from {
-    margin-left: -100px;
+    
     opacity: 0.1;
   }
   to {
-    margin-left: 0;
+    
     opacity: 1;
   }
 }
