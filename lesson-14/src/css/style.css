@@ -8,8 +8,8 @@
 }
 @keyframes slide-from-right {
   from {
-    opacity: 0;
     transform: translateX(100px);
+    opacity: 0.1;
   }
   to {
     transform: translateX(0px);
@@ -19,7 +19,7 @@
 @keyframes slide-from-left {
   from {
     transform: translateX(-100px);
-    opacity: 0;
+    opacity: 0.1;
   }
   to {
     transform: translateX(0px);
@@ -27,9 +27,9 @@
   }
 }
 @-webkit-keyframes slide-from-right {
-  from {   
-    opacity: 0;
+  from {
     transform: translateX(100px);
+    opacity: 0.1;
   }
   to {
     transform: translateX(0px);
@@ -39,7 +39,7 @@
 @-webkit-keyframes slide-from-left {
   from {
     transform: translateX(-100px);
-    opacity: 0;
+    opacity: 0.1;
   }
   to {
     transform: translateX(0px);
@@ -47,12 +47,12 @@
   }
 }
 @keyframes slide_down {
-    from {
-      margin-top: -200px;
-    }
-    to {
-      margin-top: 0px
-    }
+        from {
+          margin-top: -200px;
+        }
+        to {
+          margin-top: 0px
+        }
 }
 @-webkit-keyframes fade {
   from {
@@ -765,5 +765,3 @@ header ul li:before {
 .overlay .popup-form__btn:hover {
   box-shadow: 0 0 10px #c78030;
 }
-
-

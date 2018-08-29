@@ -418,9 +418,13 @@ window.addEventListener('DOMContentLoaded', function () {
 			scroll(a, 'total', 5, 150);
 		}
 	});
-	var nullCheck = setInterval(function () {
-		if (restDays.value == '' || persons.value == '') {
-			totalValue.innerHTML = '0';
-		}
-	}, 500);
+	if (restDays != '' && persons != '') {
+		var _nullCheck = setInterval(function () {
+			if (restDays.value == '' || persons.value == '') {
+				totalValue.innerHTML = '0';
+			}
+		}, 100);
+	} else {
+		clearInterval(nullCheck);
+	}
 });

@@ -420,11 +420,13 @@ window.addEventListener('DOMContentLoaded', () => {
 	
 
 	});
-	let nullCheck = setInterval(function (){
-		if(restDays.value == '' || persons.value == ''){
-			totalValue.innerHTML = '0';
-		} 
-	}, 500);
-		
-
+	if(restDays != '' && persons != ''){
+			let nullCheck = setInterval(function (){
+			if(restDays.value == '' || persons.value == ''){
+				totalValue.innerHTML = '0';
+			} 
+		}, 100); 
+	} else {
+		clearInterval(nullCheck);
+	}
 });

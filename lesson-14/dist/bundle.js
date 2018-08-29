@@ -1,7 +1,148 @@
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
 //dsaddasdasdasda
 window.addEventListener('DOMContentLoaded', () => {
 
 // Tabs	
+
+	let tab = __webpack_require__(1);	
+	tab();
+
+// Smooth scrolling
+
+	let smoothScrolling = __webpack_require__(2);
+	smoothScrolling();
+
+// Modal showing for timer
+
+	let modal = __webpack_require__(3);
+	modal();
+		
+// Popup animation
+	
+	let popupAnimation = __webpack_require__(4);
+	popupAnimation();
+
+// Class
+
+	let classFoo = __webpack_require__(5);
+	classFoo();
+
+// Form modal
+	
+	let ajax = __webpack_require__(6);
+	ajax ();
+
+// Slider
+
+	let slider = __webpack_require__(7);
+	slider();
+
+// Calculator
+
+	let calculator = __webpack_require__(8);
+	calculator();
+
+// Timer
+	
+	let timer = __webpack_require__(9);
+	timer();	
+	
+});
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports) {
+
+function tab(){
 
 	let tab = document.getElementsByClassName('info-header-tab'),
 		tabContent = document.getElementsByClassName('info-tabcontent'),
@@ -35,69 +176,15 @@ window.addEventListener('DOMContentLoaded', () => {
 		}
 	});	
 
-// Timer
+}
 
-	let deadline = '2018-10-31';
+module.exports = tab;
 
-	function getTimeRemaining (endTime) {
-		let t = Date.parse(endTime) - Date.parse(new Date()),
-			seconds = Math.floor( (t/1000) % 60 ),
-			minutes = Math.floor( (t/1000/60) % 60),
-			hours = Math.floor( (t/(1000*60*60)) );
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
 
-		return {
-			'total': t,
-			'hours': hours,
-			'minutes': minutes,
-			'seconds': seconds
-		};
-	}
-
-	function setClock (id, endTime) {
-		
-		let timer = document.getElementById(id),
-			hours = timer.querySelector('.hours'),
-			minutes = timer.querySelector('.minutes'),
-			seconds= timer.querySelector('.seconds');
-
-		
-
-		function updateClock () {
-			let t = getTimeRemaining(endTime);
-
-			hours.innerHTML = t.hours;
-			if(hours.innerHTML < 10){
-				hours.innerHTML = `0${hours.innerHTML}`;
-			}
-			
-			minutes.innerHTML = t.minutes;
-			if(minutes.innerHTML < 10){
-				minutes.innerHTML = `0${minutes.innerHTML}`;
-			}
-
-			seconds.innerHTML = t.seconds;
-			if(seconds.innerHTML < 10){
-				seconds.innerHTML = `0${seconds.innerHTML}`;
-			}
-		let timeInterval = setInterval(updateClock, 1000);	
-			if(t.total <= 0){
-				clearInterval(timeInterval);
-				hours.innerHTML = '0' + '0';
-				minutes.innerHTML = '0' + '0';
-				seconds.innerHTML = '0' + '0';
-			}
-		}
-
-		updateClock();
-
-		
-
-	}
-
-	setClock('timer', deadline);
-
-// Smooth scrolling
-
+function smoothScrolling () {
 	function animate (draw, duration) {
 		let start = performance.now();
 
@@ -118,13 +205,18 @@ window.addEventListener('DOMContentLoaded', () => {
 		animate(function(timePassed){
 			let target = event.target,
 				section = document.getElementById(target.getAttribute('href').slice(1));
-			window.scrollBy(0, section.getBoundingClientRect().top / 20 - 3)		
+			window.scrollBy(0, section.getBoundingClientRect().top / 20 - 7);		
 		}, 1200)
 	})
+}
 
+module.exports = smoothScrolling;
 
-// Modal showing for timer
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
 
+function modal () {
 	let more = document.querySelector('.more'),
 		overlay = document.querySelector('.overlay'),
 		close = document.querySelector('.popup-close'); 
@@ -148,31 +240,37 @@ window.addEventListener('DOMContentLoaded', () => {
 		overlay = document.querySelector('.overlay'),
 		close = document.querySelector('.popup-close'); 
 
-		more.addEventListener('click', function  () {
-			this.classList.add('more-splash');
-			overlay.style.display = 'block';
-			document.body.style.overflow = 'hidden';
-		});	
-		close.addEventListener('click', () => {
-			overlay.style.display = 'none';
-			more.classList.remove('more-splash');
-			document.body.style.overflow = '';
-		});
+	more.addEventListener('click', function  () {
+		this.classList.add('more-splash');
+		overlay.style.display = 'block';
+		document.body.style.overflow = 'hidden';
+	});	
+	close.addEventListener('click', () => {
+		overlay.style.display = 'none';
+		more.classList.remove('more-splash');
+		document.body.style.overflow = '';
+	});
 	}	
 
+}
+module.exports = modal;
 
-// Popup animation
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+function popupAnimation (){
 	let browser = detect.parse(navigator.userAgent),
 		animationStartBtn = document.querySelector('.more'),
 		popup = document.querySelector('.popup');
 		
 	if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-		alert('Sorre, Вы зашли с мобилки и никакой анимации не будет...');
+		alert('Sorre, Вы зашли с мобилки и никакой анимации не будет...')
 	} else {
 		if(browser.browser.family == 'IE' && browser.browser.family == 'Edge'){
 			animationStartBtn.onclick = function () {
 				popup.style.cssText = '-webkit-animation: slide_down 2s cubic-bezier(.51,-0.24,.89,1.83);-o-animation: slide_down 2s cubic-bezier(.51,-0.24,.89,1.83);animation: slide_down 2s cubic-bezier(.51,-0.24,.89,1.83);';
-			};
+			}
 		} else {
 			animationStartBtn.onclick = function(){
 				let marginLeft = -200,
@@ -187,13 +285,18 @@ window.addEventListener('DOMContentLoaded', () => {
 						popup.style.cssText = `margin-left: ${marginLeft}px; margin-top: ${marginTop}px`;
 					}
 				}
-			};
+			}
 		}
 	}	
+}
 
+module.exports = popupAnimation;
 
-// Class
+/***/ }),
+/* 5 */
+/***/ (function(module, exports) {
 
+function classFoo(){
 	class options {
 		constructor(height, width, bg, fontSize, textAlign) {
 			this.height = height;
@@ -219,9 +322,15 @@ window.addEventListener('DOMContentLoaded', () => {
 	const Div = new options(100, 1000, '#fff', 32, 'center');
 
 	Div.newBlock();
+}
 
-// Form modal
-	
+module.exports = classFoo;
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports) {
+
+function ajax () {
 	let message = {},
 		formArr = document.getElementsByClassName('main-form');
 	message.loading = 'Загрузка...';
@@ -254,20 +363,20 @@ window.addEventListener('DOMContentLoaded', () => {
 
 					request.onreadystatechange = function(){
 						if (request.readyState < 4){
-							resolve();
+							resolve()
 						} else if(request.readyState === 4){
 							if(request.status == 200 && request.status < 300){
-								resolve();
+								resolve()
 								// Добавляем контент на страницу
 							}
 							else {
-								reject();
+								reject()
 							}
 						}
 					};
 
 					request.send(Data);
-				});
+				})
 			}
 
 			function clearInput(){
@@ -287,13 +396,19 @@ window.addEventListener('DOMContentLoaded', () => {
 								}, 1000);
 							})
 							.catch(() => statusMessage.innerHTML = message.failure)
-							.then(clearInput);
+							.then(clearInput)
 
 		});	
 	}
+}
 
-	// Slider
+module.exports = ajax;
 
+/***/ }),
+/* 7 */
+/***/ (function(module, exports) {
+
+function slider  () {
 	let slideIndex = 1,
 		slides = document.getElementsByClassName('slider-item'),
 		prev = document.querySelector('.prev'),
@@ -332,16 +447,18 @@ window.addEventListener('DOMContentLoaded', () => {
 	prev.addEventListener('click', function(){
 		plusSlides(-1);
 		slides[slideIndex - 1].style.cssText = `
-			animation: slide-from-right 1000ms ease-in-out; 
+			animation: slide-from-right 2s; 
 		`;
-		wrap.style.cssText = `overflow-x: hidden`;
+		// slides[slideIndex - 1].classList.add('animated slideOutLeft');
+		wrap.style.cssText = `overflow: hidden`;
 	});
 	next.addEventListener('click', function(){
 		plusSlides(1);
 		slides[slideIndex - 1].style.cssText = `
-			animation: slide-from-left 1000ms ease-in-out; 
+			animation: slide-from-left 2s; 
 		`;
-		wrap.style.cssText = `overflow-x: hidden`;
+		// slides[slideIndex - 1].classList.add('animated slideOutRight');
+		wrap.style.cssText = `overflow: hidden`;
 	});
 
 	function currentSlide (n) {
@@ -355,9 +472,15 @@ window.addEventListener('DOMContentLoaded', () => {
 			} 
 		}
 	});
+}
 
-	// Calculator
+module.exports = slider;
 
+/***/ }),
+/* 8 */
+/***/ (function(module, exports) {
+
+function calculator () {
 	let persons = document.getElementsByClassName('counter-block-input')[0],
 		restDays = document.getElementsByClassName('counter-block-input')[1],
 		place = document.getElementById('select'),
@@ -420,10 +543,85 @@ window.addEventListener('DOMContentLoaded', () => {
 	
 
 	});
-	let nullCheck = setInterval(function (){
-		if(restDays.value == '' || persons.value == ''){
-			totalValue.innerHTML = '0';
-		} 
-	}, 500);
-	
-});
+	if(restDays != '' && persons != ''){
+			let nullCheck = setInterval(function (){
+			if(restDays.value == '' || persons.value == ''){
+				totalValue.innerHTML = '0';
+			} 
+		}, 100); 
+	} else {
+		clearInterval(nullCheck);
+	}
+}
+
+module.exports = calculator;
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports) {
+
+function timer () {
+	let deadline = '2018-10-31';
+
+	function getTimeRemaining (endTime) {
+		let t = Date.parse(endTime) - Date.parse(new Date()),
+			seconds = Math.floor( (t/1000) % 60 ),
+			minutes = Math.floor( (t/1000/60) % 60),
+			hours = Math.floor( (t/(1000*60*60)) );
+
+		return {
+			'total': t,
+			'hours': hours,
+			'minutes': minutes,
+			'seconds': seconds
+		};
+	}
+
+	function setClock (id, endTime) {
+		
+		let timer = document.getElementById(id),
+			hours = timer.querySelector('.hours'),
+			minutes = timer.querySelector('.minutes'),
+			seconds= timer.querySelector('.seconds');
+
+		
+
+		function updateClock () {
+			let t = getTimeRemaining(endTime);
+
+			hours.innerHTML = t.hours;
+			if(hours.innerHTML < 10){
+				hours.innerHTML = `0${hours.innerHTML}`;
+			}
+			
+			minutes.innerHTML = t.minutes;
+			if(minutes.innerHTML < 10){
+				minutes.innerHTML = `0${minutes.innerHTML}`;
+			}
+
+			seconds.innerHTML = t.seconds;
+			if(seconds.innerHTML < 10){
+				seconds.innerHTML = `0${seconds.innerHTML}`;
+			}
+		let timeInterval = setInterval(updateClock, 1000);	
+			if(t.total <= 0){
+				clearInterval(timeInterval);
+				hours.innerHTML = '0' + '0';
+				minutes.innerHTML = '0' + '0';
+				seconds.innerHTML = '0' + '0';
+			}
+		}
+
+		updateClock();
+
+		
+
+	}
+
+	setClock('timer', deadline);
+}
+
+module.exports = timer;
+
+/***/ })
+/******/ ]);
