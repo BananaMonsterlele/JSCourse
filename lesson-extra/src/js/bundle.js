@@ -1,4 +1,4 @@
-'use strict';
+
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -99,58 +99,29 @@ window.addEventListener('DOMContentLoaded', function () {
 
 	// Smooth scrolling
 
-	(function () {
-		// Code in a function to create an isolate scope
+	function animate(draw, duration) {
+		var start = performance.now();
 
-		var speed = 500,
-		    moving_frequency = 15,
-		    links = document.querySelectorAll('li a'),
-		    href = void 0;
-
-		for (var i = 0; i < links.length; i++) {
-			href = links[i].attributes.href === undefined ? null : links[i].attributes.href.nodeValue.toString();
-			if (href !== null && href.length > 1 && href.substr(0, 1) == '#') {
-				links[i].onclick = function () {
-					var element = void 0;
-					var href = this.attributes.href.nodeValue.toString();
-					element = document.getElementById(href.substr(1));
-					var hop_count = speed / moving_frequency;
-					var getScrollTopDocumentAtBegin = getScrollTopDocument();
-					var gap = (getScrollTopElement(element) - getScrollTopDocumentAtBegin) / hop_count;
-
-					var _loop = function _loop(_i) {
-						(function () {
-							var hop_top_position = gap * _i;
-							setTimeout(function () {
-								window.scrollTo(0, hop_top_position + getScrollTopDocumentAtBegin);
-							}, moving_frequency * _i);
-						})();
-					};
-
-					for (var _i = 1; _i <= hop_count; _i++) {
-						_loop(_i);
-					}
-
-					return false;
-				};
+		requestAnimationFrame(function animate(time) {
+			var timePassed = time - start;
+			if (timePassed > duration) timePassed = duration;
+			draw(timePassed);
+			if (timePassed < duration) {
+				requestAnimationFrame(animate);
 			}
-		}
+		});
+	}
 
-		var getScrollTopElement = function getScrollTopElement(e) {
-			var top = 0;
+	var nav = document.querySelector('nav');
 
-			while (e.offsetParent != undefined && e.offsetParent != null) {
-				top += e.offsetTop + (e.clientTop != null ? e.clientTop : 0);
-				e = e.offsetParent;
-			}
-
-			return top;
-		};
-
-		var getScrollTopDocument = function getScrollTopDocument() {
-			return document.documentElement.scrollTop + document.body.scrollTop;
-		};
-	})();
+	nav.addEventListener('click', function (event) {
+		event.preventDefault();
+		animate(function (timePassed) {
+			var target = event.target,
+			    section = document.getElementById(target.getAttribute('href').slice(1));
+			window.scrollBy(0, section.getBoundingClientRect().top / 20 - 7);
+		}, 1200);
+	});
 
 	// Modal showing for timer
 
@@ -173,7 +144,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
 	var length = document.querySelectorAll('.description-btn').length;
 
-	var _loop2 = function _loop2(i) {
+	var _loop = function _loop(i) {
 		var more = document.querySelectorAll('.description-btn')[i],
 		    overlay = document.querySelector('.overlay'),
 		    close = document.querySelector('.popup-close');
@@ -191,7 +162,7 @@ window.addEventListener('DOMContentLoaded', function () {
 	};
 
 	for (var i = 0; i < length; i++) {
-		_loop2(i);
+		_loop(i);
 	}
 
 	// Popup animation
@@ -262,7 +233,7 @@ window.addEventListener('DOMContentLoaded', function () {
 	message.success = 'Спасибо, скоро мы с вами свяжемся';
 	message.failure = 'Что-то пошло не так...';
 
-	var _loop3 = function _loop3(y) {
+	var _loop2 = function _loop2(y) {
 		var form = formArr[y],
 		    input = form.getElementsByTagName('input'),
 		    statusMessage = document.createElement('div');
@@ -323,6 +294,133 @@ window.addEventListener('DOMContentLoaded', function () {
 	};
 
 	for (var y = 0; y < formArr.length; y++) {
-		_loop3(y);
+		_loop2(y);
 	}
+
+	// Slider
+
+	var slideIndex = 1,
+	    slides = document.getElementsByClassName('slider-item'),
+	    prev = document.querySelector('.prev'),
+	    next = document.querySelector('.next'),
+	    dotsWrap = document.querySelector('.slider-dots'),
+	    dots = document.getElementsByClassName('dot'),
+	    wrap = document.querySelector('.wrap');
+
+	showSlides(slideIndex);
+
+	function showSlides(n) {
+
+		if (n > slides.length) {
+			slideIndex = 1;
+		}
+		if (n < 1) {
+			slideIndex = slides.length;
+		}
+
+		for (var i = 0; i < slides.length; i++) {
+			slides[i].style.display = 'none';
+		}
+
+		for (var _i = 0; _i < dots.length; _i++) {
+			dots[_i].classList.remove('dot-active');
+		}
+
+		slides[slideIndex - 1].style.display = 'block';
+		dots[slideIndex - 1].classList.add('dot-active');
+	}
+
+	function plusSlides(n) {
+		showSlides(slideIndex += n);
+	}
+
+	prev.addEventListener('click', function () {
+		plusSlides(-1);
+		slides[slideIndex - 1].style.cssText = '\n\t\t\tanimation: slide-from-right 2s; \n\t\t';
+		// slides[slideIndex - 1].classList.add('animated slideOutLeft');
+		wrap.style.cssText = 'overflow: hidden';
+	});
+	next.addEventListener('click', function () {
+		plusSlides(1);
+		slides[slideIndex - 1].style.cssText = '\n\t\t\tanimation: slide-from-left 2s; \n\t\t';
+		// slides[slideIndex - 1].classList.add('animated slideOutRight');
+		wrap.style.cssText = 'overflow: hidden';
+	});
+
+	function currentSlide(n) {
+		showSlides(slideIndex = n);
+	}
+
+	dotsWrap, addEventListener('click', function (event) {
+		for (var i = 0; i < dots.length + 1; i++) {
+			if (event.target.classList.contains('dot') && event.target == dots[i - 1]) {
+				currentSlide(i);
+			}
+		}
+	});
+
+	// Calculator
+
+	var persons = document.getElementsByClassName('counter-block-input')[0],
+	    restDays = document.getElementsByClassName('counter-block-input')[1],
+	    place = document.getElementById('select'),
+	    totalValue = document.getElementById('total'),
+	    personSum = 0,
+	    daySum = 0,
+	    total = 0;
+
+	totalValue.innerHTML = '0';
+
+	persons.onkeyup = function () {
+		this.value = this.value.replace(/\D/g, "");
+	};
+	restDays.onkeyup = function () {
+		this.value = this.value.replace(/\D/g, "");
+	};
+	function scroll(val, el, timeout, step) {
+		var i = 0;
+		(function () {
+			if (i <= val) {
+				setTimeout(arguments.callee, timeout);
+				document.getElementById(el).innerHTML = i;
+				i = i + step;
+			} else {
+				document.getElementById(el).innerHTML = val;
+			}
+		})();
+	}
+
+	persons.addEventListener('change', function () {
+		personSum = +this.value;
+		total = (daySum + personSum) * 4000;
+		if (restDays.value == '') {
+			totalValue.innerHTML = '0';
+		} else {
+			scroll(total, 'total', 5, 150);
+		}
+	});
+	restDays.addEventListener('change', function () {
+		daySum = +this.value;
+		total = (daySum + personSum) * 4000;
+		if (persons.value == '') {
+			totalValue.innerHTML = '0';
+		} else {
+			scroll(total, 'total', 5, 150);
+		}
+	});
+
+	place.addEventListener('change', function () {
+		if (restDays.value == '' || persons.value == '') {
+			totalValue.innerHTML = '0';
+		} else {
+			var a = total;
+			a = a * this.options[this.selectedIndex].value;
+			scroll(a, 'total', 5, 150);
+		}
+	});
+	var nullCheck = setInterval(function () {
+		if (restDays.value == '' || persons.value == '') {
+			totalValue.innerHTML = '0';
+		}
+	}, 500);
 });

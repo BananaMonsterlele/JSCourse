@@ -6,6 +6,46 @@
   -webkit-animation-name: fade;
   -webkit-animation-duration: 2.5s;
 }
+@keyframes slide-from-right {
+  from {
+    transform: translateX(100px);
+    opacity: 0.1;
+  }
+  to {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+@keyframes slide-from-left {
+  from {
+    transform: translateX(-100px);
+    opacity: 0.1;
+  }
+  to {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+@-webkit-keyframes slide-from-right {
+  from {
+    transform: translateX(100px);
+    opacity: 0.1;
+  }
+  to {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+@-webkit-keyframes slide-from-left {
+  from {
+    transform: translateX(-100px);
+    opacity: 0.1;
+  }
+  to {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
 @keyframes slide_down {
         from {
           margin-top: -200px;
