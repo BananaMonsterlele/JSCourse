@@ -17,3 +17,9 @@ describe('Exam', () => {
     });
 });
 
+
+
+    expect(num).toEqual(5);
+    expect(each(arr1, myFunc)).toBe('object');
+    expect(each(arr1, myFunc)).toEqual([8, 7, 6, 5, 4]);
+    expect(each(arr1, myFunc).lengthe).toEqual(5);

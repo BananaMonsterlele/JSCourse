@@ -1,0 +1,16 @@
+{
+  "name": "lesson-15-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "sum.js",
+  "dependencies": {
+    "chai": "^4.1.2",
+    "jest": "^23.5.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC"
+}
