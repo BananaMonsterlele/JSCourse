@@ -29,13 +29,17 @@ window.addEventListener('DOMContentLoaded', () => {
 // Form modal
 	
 	let ajax = require('ajax.js');
-	ajax ();
+	ajax();
 
 // Slider
 
 	let slider = require('slider.js');
 	slider();
 
+// Calculator
+
+	let calculator = require('calculator.js');
+	calculator();	
 
 
 // Timer
@@ -45,7 +49,3 @@ window.addEventListener('DOMContentLoaded', () => {
 	
 });
 
-// Calculator
-
-	let calculator = require('calculator.js');
-	calculator();

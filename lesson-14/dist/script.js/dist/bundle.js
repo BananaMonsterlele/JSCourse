@@ -1,4 +1,4 @@
-
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -532,29 +532,29 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		restDays.onkeyup = function () {
 			this.value = this.value.replace(/\D/g, "");
 		};
-		function animateNumber(total) {
-			var number = 0;
 
-			setInterval(function () {
-				number += 200;
+		var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || //Вебкиты для браузеров
+		window.msRequestAnimationFrame || function (f) {
+			window.setTimeout(function () {
+				f(Date.now());
+			}, 1000 / 60);
+		}; //Если что-то идет не так
 
-				if (number <= total) {
-					totalValue.innerHTML = number;
-				}
-			}, 1);
-		};
-		//    function animate (draw, duration) {
-		// 	let start = performance.now();
+		var cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame || window.webkitCancelAnimationFrame || window.msCancelAnimationFrame;
 
-		// 	requestAnimationFrame(function animate(time){
-		// 		let timePassed = time - start;
-		// 		if(timePassed > duration) timePassed = duration;
-		// 		draw(timePassed);
-		// 		if(timePassed < duration){
-		// 			requestAnimationFrame(animate); 
-		// 		} 
-		// 	})
-		// }
+		// your code here
+
+		var progress = 0;
+		function doSomething() {
+			if (progress <= total) {
+				var myAnimation = requestAnimationFrame(doSomething);
+				totalValue.innerHTML = progress;
+				progress += total * 0.03;
+			} else {
+				cancelAnimationFrame(requestAnimationFrame);
+				totalValue.innerHTML = total;
+			}
+		}
 
 		persons.addEventListener('change', function () {
 			personSum = +this.value;
@@ -562,21 +562,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			if (restDays.value == '') {
 				totalValue.innerHTML = '0';
 			} else {
-				animateNumber(total);
-				// animate(function(timePassed){
-				// 	// let number = 0;
-				// 	// if (number <= total) {
-				// 	// number += timePassed;
-				// 	// timePassed += total;
-				// 	// totalValue.innerHTML = Math.round(timePassed);
-				// 	// number+=200;
-				// 	// }
-				// 	for(let i = 20; i <= total; i++){
-				// 		let n = 0;
-				// 		n = i;
-				// 		totalValue.innerHTML = Math.round(timePassed);	
-				// 	}	
-				// }, 500);
+				// totalValue.innerHTML = total;
+				// animateNumber(total)
+				doSomething();
 			}
 		});
 		restDays.addEventListener('change', function () {
@@ -585,21 +573,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			if (persons.value == '') {
 				totalValue.innerHTML = '0';
 			} else {
-				animateNumber(total);
-				// animate(function(timePassed){
-				// 	// let number = 0;
-				// 	// if (number <= total) {
-				// 	// number += timePassed;
-				// 	// timePassed += total;
-				// 	// totalValue.innerHTML = Math.round(timePassed);
-				// 	// number+=200;
-				// 	// }
-				// 	for(let i = 20; i <= total; i++){
-				// 		let n = 0;
-				// 		n = i;
-				// 		totalValue.innerHTML = Math.round(timePassed);	
-				// 	}	
-				// }, 500);
+				// totalValue.innerHTML = total;
+				// animateNumber(total)
+				doSomething();
 			}
 		});
 
@@ -609,20 +585,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			} else {
 				var a = total;
 				a = a * this.options[this.selectedIndex].value;
-				// animate(function(timePassed){
-				// 	let number = 0;
-				// 	console.log(number);
-				// 	if (number <= a) {
-				// 	console.log(number);
-				// 	 totalValue.innerHTML = number;
-				// 	 console.log(totalValue.value);
-				// 	 number+=200;
-				// 	 totalValue.innerHTML = timePassed * 22;
-				// 	 console.log(number);
-				// 	 console.log(timePassed);
-				// 	}	
-				// }, 1);
-				animateNumber(a);
+				// totalValue.innerHTML = a;
+				// animateNumber(a)
+				var foo = function doSomethingA() {
+					if (progress <= a) {
+						var myAnimation = requestAnimationFrame(doSomethingA);
+						totalValue.innerHTML = progress;
+						progress += a * 0.03;
+					} else {
+						cancelAnimationFrame(requestAnimationFrame);
+						totalValue.innerHTML = a;
+					}
+				};
+				foo();
 			}
 		});
 		if (restDays != '' && persons != '') {
