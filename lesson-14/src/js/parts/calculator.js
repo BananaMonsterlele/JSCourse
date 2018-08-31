@@ -93,19 +93,20 @@ function calculator () {
 		} else {
 			let a = total;
 			a = a * this.options[this.selectedIndex].value;
-			animate(function(timePassed){
-				let number = 0;
-				console.log(number);
-				if (number <= a) {
-				console.log(number);
-				 totalValue.innerHTML = number;
-				 console.log(totalValue.value);
-				 number+=200;
-				 totalValue.innerHTML = timePassed * 22;
-				 console.log(number);
-				 console.log(timePassed);
-				}	
-			}, 1);
+			// animate(function(timePassed){
+			// 	let number = 0;
+			// 	console.log(number);
+			// 	if (number <= a) {
+			// 	console.log(number);
+			// 	 totalValue.innerHTML = number;
+			// 	 console.log(totalValue.value);
+			// 	 number+=200;
+			// 	 totalValue.innerHTML = timePassed * 22;
+			// 	 console.log(number);
+			// 	 console.log(timePassed);
+			// 	}	
+			// }, 1);
+			animateNumber(a)
 		}
 	});
 	if(restDays != '' && persons != ''){
