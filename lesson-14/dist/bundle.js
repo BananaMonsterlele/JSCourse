@@ -331,75 +331,78 @@ module.exports = classFoo;
 /***/ (function(module, exports) {
 
 function ajax () {
-	let message = {},
-		formArr = document.getElementsByClassName('main-form');
-	message.loading = 'Загрузка...';
-	message.success = 'Спасибо, скоро мы с вами свяжемся';
-	message.failure = 'Что-то пошло не так...';
+	// let message = {},
+	// 	formArr = document.getElementsByClassName('main-form');
+	// message.loading = 'Загрузка...';
+	// message.success = 'Спасибо, скоро мы с вами свяжемся';
+	// message.failure = 'Что-то пошло не так...';
 
 
-	for(let y = 0; y < formArr.length; y++){
-		let	form = formArr[y],
-			input = form.getElementsByTagName('input'),
-			statusMessage = document.createElement('div');
+	// for(let y = 0; y < formArr.length; y++){
+	// 	let	form = formArr[y],
+	// 		input = form.getElementsByTagName('input'),
+	// 		statusMessage = document.createElement('div');
 
-		statusMessage.classList.add('status');
+	// 	statusMessage.classList.add('status');
 
 		
-		form.addEventListener('submit', function(event){
-			event.preventDefault();
-			form.appendChild(statusMessage);
+	// 	form.addEventListener('submit', function(event){
+	// 		event.preventDefault();
+	// 		form.appendChild(statusMessage);
 
-			// AJAX
+	// 		// AJAX
 
-			let formData = new FormData(form);
+	// 		let formData = new FormData(form);
 
-			function postData(Data){
-				return new Promise(function(resolve,reject){
-					let request = new XMLHttpRequest();
+	// 		function postData(Data){
+	// 			return new Promise(function(resolve,reject){
+	// 				let request = new XMLHttpRequest();
 
-					request.open("POST", "../server.php");
-					request.setRequestHeader("Content-Type", "application/x-www-form-urlendcoded");
+	// 				request.open("POST", "../server.php");
+	// 				request.setRequestHeader("Content-Type", "application/x-www-form-urlendcoded");
 
-					request.onreadystatechange = function(){
-						if (request.readyState < 4){
-							resolve()
-						} else if(request.readyState === 4){
-							if(request.status == 200 && request.status < 300){
-								resolve()
-								// Добавляем контент на страницу
-							}
-							else {
-								reject()
-							}
-						}
-					};
+	// 				request.onreadystatechange = function(){
+	// 					if (request.readyState < 4){
+	// 						resolve()
+	// 					} else if(request.readyState === 4){
+	// 						if(request.status == 200 && request.status < 300){
+	// 							resolve()
+	// 							// Добавляем контент на страницу
+	// 						}
+	// 						else {
+	// 							reject()
+	// 						}
+	// 					}
+	// 				};
 
-					request.send(Data);
-				})
-			}
+	// 				request.send(Data);
+	// 			})
+	// 		}
 
-			function clearInput(){
-				for(let i = 0; i < input.length; i++){
-					input[i].value = '';
-					// Очищаем поля ввода
-				}
-			}
+	// 		function clearInput(){
+	// 			for(let i = 0; i < input.length; i++){
+	// 				input[i].value = '';
+	// 				// Очищаем поля ввода
+	// 			}
+	// 		}
 
-			postData(formData)
-							.then(() => statusMessage.innerHTML = message.loading)
-							.then(() => {
-								statusMessage.innerHTML = '<img src="img/success.png" alt="Success">';
-								statusMessage.style.cssText = 'text-align: center; margin-top: 15px';
-								setInterval(function(){
-									statusMessage.style.cssText = 'display:none';
-								}, 1000);
-							})
-							.catch(() => statusMessage.innerHTML = message.failure)
-							.then(clearInput)
+	// 		postData(formData)
+	// 						.then(() => statusMessage.innerHTML = message.loading)
+	// 						.then(() => {
+	// 							statusMessage.innerHTML = '<img src="img/success.png" alt="Success">';
+	// 							statusMessage.style.cssText = 'text-align: center; margin-top: 15px';
+	// 							setInterval(function(){
+	// 								statusMessage.style.cssText = 'display:none';
+	// 							}, 1000);
+	// 						})
+	// 						.catch(() => statusMessage.innerHTML = message.failure)
+	// 						.then(clearInput)
 
-		});	
-	}
+	// 	});	
+	// }
+
+
+	
 }
 
 module.exports = ajax;
@@ -498,28 +501,51 @@ function calculator () {
 	restDays.onkeyup = function() {
   		this.value = this.value.replace( /\D/g, "");
 	};
-	function scroll(val,el,timeout,step){
-	var i=0;
-	(function(){
-	if(i<=val){
-	setTimeout(arguments.callee,timeout);
-	document.getElementById(el).innerHTML=i;
-	i=i+step;
-	}else{
-	document.getElementById(el).innerHTML=val;
-	}
-	})();
-	}
-	 
-	
-	
+	function animateNumber(total) {
+           let number = 0;
+
+        setInterval(function() {
+            number+=200;
+
+               if (number <= total) {
+                totalValue.innerHTML = number;
+               }
+        }, 1);
+    };
+ //    function animate (draw, duration) {
+	// 	let start = performance.now();
+
+	// 	requestAnimationFrame(function animate(time){
+	// 		let timePassed = time - start;
+	// 		if(timePassed > duration) timePassed = duration;
+	// 		draw(timePassed);
+	// 		if(timePassed < duration){
+	// 			requestAnimationFrame(animate); 
+	// 		} 
+	// 	})
+	// }
+
 	persons.addEventListener('change', function(){
 		personSum = +this.value;
 		total = (daySum + personSum) * 4000;
 		if(restDays.value == ''){
 			totalValue.innerHTML = '0';
 		} else {
-			scroll(total,'total',5,150);
+			animateNumber(total)
+			// animate(function(timePassed){
+			// 	// let number = 0;
+			// 	// if (number <= total) {
+			// 	// number += timePassed;
+			// 	// timePassed += total;
+			// 	// totalValue.innerHTML = Math.round(timePassed);
+			// 	// number+=200;
+			// 	// }
+			// 	for(let i = 20; i <= total; i++){
+			// 		let n = 0;
+			// 		n = i;
+			// 		totalValue.innerHTML = Math.round(timePassed);	
+			// 	}	
+			// }, 500);
 		} 
 	});
 	restDays.addEventListener('change', function(){
@@ -528,7 +554,21 @@ function calculator () {
 		if(persons.value == ''){
 			totalValue.innerHTML = '0';
 		} else {
-			scroll(total,'total',5,150);
+			animateNumber(total)
+			// animate(function(timePassed){
+			// 	// let number = 0;
+			// 	// if (number <= total) {
+			// 	// number += timePassed;
+			// 	// timePassed += total;
+			// 	// totalValue.innerHTML = Math.round(timePassed);
+			// 	// number+=200;
+			// 	// }
+			// 	for(let i = 20; i <= total; i++){
+			// 		let n = 0;
+			// 		n = i;
+			// 		totalValue.innerHTML = Math.round(timePassed);	
+			// 	}	
+			// }, 500);
 		}
 	});	
 
@@ -538,10 +578,20 @@ function calculator () {
 		} else {
 			let a = total;
 			a = a * this.options[this.selectedIndex].value;
-			scroll(a,'total',5,150);
+			animate(function(timePassed){
+				let number = 0;
+				console.log(number);
+				if (number <= a) {
+				console.log(number);
+				 totalValue.innerHTML = number;
+				 console.log(totalValue.value);
+				 number+=200;
+				 totalValue.innerHTML = timePassed * 22;
+				 console.log(number);
+				 console.log(timePassed);
+				}	
+			}, 1);
 		}
-	
-
 	});
 	if(restDays != '' && persons != ''){
 			let nullCheck = setInterval(function (){

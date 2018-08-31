@@ -36,10 +36,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	let slider = require('slider.js');
 	slider();
 
-// Calculator
 
-	let calculator = require('calculator.js');
-	calculator();
 
 // Timer
 	
@@ -47,3 +44,8 @@ window.addEventListener('DOMContentLoaded', () => {
 	time();	
 	
 });
+
+// Calculator
+
+	let calculator = require('calculator.js');
+	calculator();

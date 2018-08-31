@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "compile": "babel --presets env -d dist/js/ src/js/",
+    "compile": "babel --presets env -d dist/bundle.js dist/script.js",
     "prepublish": "npm run compile"
   },
   "author": "",
