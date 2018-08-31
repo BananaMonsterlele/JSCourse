@@ -22,30 +22,38 @@ function ajax () {
 
 			let formData = new FormData(form);
 
-			function postData(Data){
-				return new Promise(function(resolve,reject){
+			// function postData(Data){
+			// 	return new Promise(function(resolve,reject){
 					let request = new XMLHttpRequest();
 
-					request.open("POST", "../server.php");
+					request.open("POST", "../../../src/server.php");
 					request.setRequestHeader("Content-Type", "application/x-www-form-urlendcoded");
 
 					request.onreadystatechange = function(){
 						if (request.readyState < 4){
-							resolve()
+							// resolve()
+							statusMessage.innerHTML = message.loading
 						} else if(request.readyState === 4){
 							if(request.status == 200 && request.status < 300){
-								resolve()
+								// resolve()
 								// Добавляем контент на страницу
+								statusMessage.innerHTML = '<img src="img/success.png" alt="Success">';
+								statusMessage.style.cssText = 'text-align: center; margin-top: 15px';
+								setInterval(function(){
+									statusMessage.style.cssText = 'display:none';
+								}, 1000);
 							}
 							else {
-								reject()
+								// reject()
+								statusMessage.innerHTML = message.failure
 							}
 						}
 					};
 
-					request.send(Data);
-				})
-			}
+					request.send(formData);
+					clearInput();
+			// 	})
+			// }
 
 			function clearInput(){
 				for(let i = 0; i < input.length; i++){
@@ -54,17 +62,17 @@ function ajax () {
 				}
 			}
 
-			postData(formData)
-							.then(() => statusMessage.innerHTML = message.loading)
-							.then(() => {
-								statusMessage.innerHTML = '<img src="img/success.png" alt="Success">';
-								statusMessage.style.cssText = 'text-align: center; margin-top: 15px';
-								setInterval(function(){
-									statusMessage.style.cssText = 'display:none';
-								}, 1000);
-							})
-							.catch(() => statusMessage.innerHTML = message.failure)
-							.then(clearInput)
+			// postData(formData)
+			// 				.then(() => statusMessage.innerHTML = message.loading)
+			// 				.then(() => {
+			// 					statusMessage.innerHTML = '<img src="img/success.png" alt="Success">';
+			// 					statusMessage.style.cssText = 'text-align: center; margin-top: 15px';
+			// 					setInterval(function(){
+			// 						statusMessage.style.cssText = 'display:none';
+			// 					}, 1000);
+			// 				})
+			// 				.catch(() => statusMessage.innerHTML = message.failure)
+			// 				.then(clearInput)
 
 		});	
 	}

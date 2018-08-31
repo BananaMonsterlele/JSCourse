@@ -1,4 +1,3 @@
-'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -389,29 +388,37 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 				var formData = new FormData(form);
 
-				function postData(Data) {
-					return new Promise(function (resolve, reject) {
-						var request = new XMLHttpRequest();
+				// function postData(Data){
+				// 	return new Promise(function(resolve,reject){
+				var request = new XMLHttpRequest();
 
-						request.open("POST", "../server.php");
-						request.setRequestHeader("Content-Type", "application/x-www-form-urlendcoded");
+				request.open("POST", "../../../src/server.php");
+				request.setRequestHeader("Content-Type", "application/x-www-form-urlendcoded");
 
-						request.onreadystatechange = function () {
-							if (request.readyState < 4) {
-								resolve();
-							} else if (request.readyState === 4) {
-								if (request.status == 200 && request.status < 300) {
-									resolve();
-									// Добавляем контент на страницу
-								} else {
-									reject();
-								}
-							}
-						};
+				request.onreadystatechange = function () {
+					if (request.readyState < 4) {
+						// resolve()
+						statusMessage.innerHTML = message.loading;
+					} else if (request.readyState === 4) {
+						if (request.status == 200 && request.status < 300) {
+							// resolve()
+							// Добавляем контент на страницу
+							statusMessage.innerHTML = '<img src="img/success.png" alt="Success">';
+							statusMessage.style.cssText = 'text-align: center; margin-top: 15px';
+							setInterval(function () {
+								statusMessage.style.cssText = 'display:none';
+							}, 1000);
+						} else {
+							// reject()
+							statusMessage.innerHTML = message.failure;
+						}
+					}
+				};
 
-						request.send(Data);
-					});
-				}
+				request.send(formData);
+				clearInput();
+				// 	})
+				// }
 
 				function clearInput() {
 					for (var i = 0; i < input.length; i++) {
@@ -420,17 +427,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 					}
 				}
 
-				postData(formData).then(function () {
-					return statusMessage.innerHTML = message.loading;
-				}).then(function () {
-					statusMessage.innerHTML = '<img src="img/success.png" alt="Success">';
-					statusMessage.style.cssText = 'text-align: center; margin-top: 15px';
-					setInterval(function () {
-						statusMessage.style.cssText = 'display:none';
-					}, 1000);
-				}).catch(function () {
-					return statusMessage.innerHTML = message.failure;
-				}).then(clearInput);
+				// postData(formData)
+				// 				.then(() => statusMessage.innerHTML = message.loading)
+				// 				.then(() => {
+				// 					statusMessage.innerHTML = '<img src="img/success.png" alt="Success">';
+				// 					statusMessage.style.cssText = 'text-align: center; margin-top: 15px';
+				// 					setInterval(function(){
+				// 						statusMessage.style.cssText = 'display:none';
+				// 					}, 1000);
+				// 				})
+				// 				.catch(() => statusMessage.innerHTML = message.failure)
+				// 				.then(clearInput)
 			});
 		};
 
