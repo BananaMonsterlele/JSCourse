@@ -93,7 +93,7 @@ function calculator () {
 		}
 	});
 	if(restDays != '' && persons != ''){
-			let nullCheck = setInterval(function (){
+			let nullCheck = setInterval( () => {
 			if(restDays.value == '' || persons.value == ''){
 				totalValue.innerHTML = '0';
 			} 

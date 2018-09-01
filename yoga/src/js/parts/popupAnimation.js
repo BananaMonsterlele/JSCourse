@@ -11,7 +11,7 @@ function popupAnimation (){
 				popup.style.cssText = '-webkit-animation: slide_down 2s cubic-bezier(.51,-0.24,.89,1.83);-o-animation: slide_down 2s cubic-bezier(.51,-0.24,.89,1.83);animation: slide_down 2s cubic-bezier(.51,-0.24,.89,1.83);';
 			}
 		} else {
-			animationStartBtn.onclick = function(){
+			animationStartBtn.onclick = () => {
 				let marginLeft = -200,
 					marginTop = -200,
 					animation = setInterval(appear, 10);

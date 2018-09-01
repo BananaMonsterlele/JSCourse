@@ -34,7 +34,7 @@ function slider  () {
 		showSlides(slideIndex += n);
 	}
 
-	prev.addEventListener('click', function(){
+	prev.addEventListener('click', () => {
 		plusSlides(-1);
 		slides[slideIndex - 1].style.cssText = `
 			animation: slide-from-right 2s; 
@@ -42,7 +42,7 @@ function slider  () {
 		// slides[slideIndex - 1].classList.add('animated slideOutLeft');
 		wrap.style.cssText = `overflow: hidden`;
 	});
-	next.addEventListener('click', function(){
+	next.addEventListener('click', () => {
 		plusSlides(1);
 		slides[slideIndex - 1].style.cssText = `
 			animation: slide-from-left 2s; 
@@ -55,7 +55,7 @@ function slider  () {
 		showSlides(slideIndex = n);
 	}
 
-	dotsWrap,addEventListener('click', function(event){
+	dotsWrap,addEventListener('click', (event) => {
 		for(let i = 0; i < dots.length + 1; i++){
 			if(event.target.classList.contains('dot') && event.target == dots[i-1]){
 				currentSlide(i);

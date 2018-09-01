@@ -607,15 +607,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				foo();
 			}
 		});
-		if (restDays != '' && persons != '') {
-			var _nullCheck = setInterval(function () {
-				if (restDays.value == '' || persons.value == '') {
-					totalValue.innerHTML = '0';
-				}
-			}, 100);
-		} else {
-			clearInterval(nullCheck);
-		}
+		var _nullCheck = setInterval(function () {
+
+			if (restDays != '' && persons != '') {
+					if (restDays.value == '' || persons.value == '') {
+						totalValue.innerHTML = '0';
+					}	
+			} else {
+				clearInterval(nullCheck);
+			}
+		}, 100);
 	}
 
 	module.exports = calculator;

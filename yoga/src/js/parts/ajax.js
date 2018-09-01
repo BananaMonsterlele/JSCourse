@@ -29,7 +29,7 @@ function ajax () {
 					request.open("POST", "../../../src/server.php");
 					request.setRequestHeader("Content-Type", "application/x-www-form-urlendcoded");
 
-					request.onreadystatechange = function(){
+					request.onreadystatechange = () => {
 						if (request.readyState < 4){
 							// resolve()
 							statusMessage.innerHTML = message.loading

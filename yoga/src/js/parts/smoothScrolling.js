@@ -14,7 +14,7 @@ function smoothScrolling () {
 
 	let nav = document.querySelector('nav');
 
-	nav.addEventListener('click', function  (event) {
+	nav.addEventListener('click', (event) => {
 		event.preventDefault();
 		animate(function(timePassed){
 			let target = event.target,
