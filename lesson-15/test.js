@@ -45,7 +45,7 @@ describe("test", function () {
 		assert.typeOf(each(arr1, myFunc), 'array');
 	});
 	it("Результат функции", function(){
-		assert.equal(each(arr1, myFunc), [8, 7, 6, 5, 4]);
+		assert.sameMembers(each(arr1, myFunc), [8, 7, 6, 5, 4]);
 	});
 	it("Длина получившегося массива", function(){
 		assert.lengthOf(each(arr1, myFunc), 5);
