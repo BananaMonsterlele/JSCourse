@@ -1,0 +1,163 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+body{
+  outline: none;
+}
+.header{
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 0px;
+}
+.container{
+  width: 1170px;
+  margin: auto;
+}
+.logo{
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+}
+.logo-img{
+  width: 38px;
+  height: 50px;
+  background: url(img/logo.png) center no-repeat;
+  margin-right: 15px;
+}
+.logo-title{
+  display: inline-block;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 0px;
+  text-transform: uppercase;
+}
+.logo-descr{
+  color: #969696;
+  font-size: 11px;
+  font-weight: 300;
+  line-height: 22px;
+}
+.tel{
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  margin-top: 5px;
+}
+.tel-title{
+  color: #292929;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 22px;
+  text-transform: uppercase;
+}
+.tel-descr{
+  color: #969696;
+  font-size: 11px;
+  font-weight: 400;
+  margin-top: 10px;
+}
+.cta{
+  width: 160px;
+  height: 40px;
+  border: 2px solid #292929;
+  margin-left: 31px;  
+  font-size: 12px;
+  font-weight: 500;
+  background-color: #fff;
+  cursor: pointer;
+}
+.menu{
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  justify-content: space-around;
+  -ms-align-items: center;
+  align-items: center;
+  height: 60px;
+  background-color: #ffcc00;
+  transform: translateY(50px);
+}
+.menu-part a{
+  text-decoration: none;
+  color: #000;
+  font-size: 14px;
+  font-weight: 700;
+}
+.main{
+  background: url(img/bg.jpg) center no-repeat;
+  width: 1920px;
+  height: 550px;
+  color: #fff;
+}
+.main-container{
+  width: 1170px;
+  height: 550px;
+  margin: 0 auto;
+}
+.main-title{
+  padding-top: 170px;
+  font-size: 36px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.main-descr{
+  padding-top: 0px;
+  font-size: 14px;
+  font-weight: 400;
+}
+.main-cta{
+  margin-top: 60px;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+}
+.main-cta_button{
+  width: 200px;
+  height: 50px;
+  background-color: #ffd200;
+  font-weight: 700;
+  border: none;
+  margin-right: 30px;
+}
+.main-cta_text__a{
+  margin-left: 30px;
+  color: #fff;
+}
