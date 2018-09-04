@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<title>Простые вкладки на CSS и jQuery | pcvector.net</title>
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="slick/slick.css">
+<link rel="stylesheet" href="slick/slick-theme.css">
+
+</head>
+
+<body>
+
+<div class="container">
+	<h1>Простые вкладки</h1>
+    <ul class="tabs">
+        <li class="active"><a href="#tab1">Цунами</a></li>
+        <li class=""><a href="#tab2">Два спутника</a></li>
+        <li class=""><a href="#tab3">На Марс</a></li>
+        <li class=""><a href="#tab4">Плутон</a></li>
+    </ul>
+    <div class="tab_container">
+        <div style="display: block;" id="tab1" class="tab_content">
+            <img src="cunami.jpg" alt="" />
+            <img src="mars.jpg" alt="" />
+            <img src="pluton.jpg" alt="" />
+            <img src="sputnik.jpg" alt="" />
+        </div>
+        <div style="display: none;" id="tab2" class="tab_content">
+            <div class="container">  
+            	<div class="view">0</div>
+        	</div>
+        </div>
+        <div style="display: none;" id="tab3" class="tab_content">
+            <button class="btn">Click Me</button>
+            <div class="modal">
+              <div class="modal__box">
+                <p>I am a modal! </p>
+                <p>Click anywhere to close me!</p>
+              </div>
+            </div>
+            
+        </div>
+        <div style="display: none;" id="tab4" class="tab_content">
+            <h2>Найден четвертый спутник Плутона</h2>
+            <a href="#"> <img src="pluton.jpg" alt=""></a>
+            <h3><a href="http://www.pcvector.net">www.pcvector.net</a></h3>
+            <p>Обнаружен четвертый спутник Плутона с помощью снимков телескопа «Хаббл» американского космического агентства NASA.
+Астрономы NASA с помощью снимков телескопа «Хаббл» установили, что у Плутона есть четвертый спутник. Спутнику дали временное название Р4. Он самый маленький по размерам по сравнению с другими спутниками, его диаметр — от 13 до 34 километров. Самый большой спутник Харон имеет 1,04 тысячи километров в диаметре, а два других Никс и Гидра — 32 и 113 километров.
+</p>            
+            <p>Плутон — карликовая планета, транснептуновый объект (ТНО) Солнечной системы и девятое по величине небесное тело, обращающееся вокруг Солнца. Изначально Плутон считался планетой, но сейчас считается одним из крупнейших объектов (возможно, самым крупным) в поясе Койпера, похожем на Главный пояс астероидов, но примерно в 20 раз шире и в 20 -200 раз массивнее последнего.
+Плутон состоит из горных пород и льда. По своей массе он меньше Луны в пять раз, а по объему — в три раза.</p>          
+            <p>Открытие четвертого спутника Плутона внесет изменения в планы  астрономической программы «Новые горизонты» (New Horizons). В рамках этой программы 19 января 2006 года к Плутону была направлена автоматическая межпланетная станция. Основными целями исследований «Новых горизонтов» являются Платон и Харо. Межпланетная станция доберется до цели только в  2015 году. К тому времени ученые уже могут внести коррективы в свои планы научных исследований.</p>
+        </div>
+    </div>
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="slick/slick.min.js"></script>
+<script src="script.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+	//Default Action
+	$(".tab_content").hide(); //Hide all content
+	$("ul.tabs li:first").addClass("active").show(); //Activate first tab
+	$(".tab_content:first").show(); //Show first tab content
+	
+	//On Click Event
+	$("ul.tabs li").click(function() {
+		$("ul.tabs li").removeClass("active"); //Remove any "active" class
+		$(this).addClass("active"); //Add "active" class to selected tab
+		$(".tab_content").hide(); //Hide all tab content
+		var activeTab = $(this).find("a").attr("href"); //Find the rel attribute value to identify the active tab + content
+		$(activeTab).fadeIn(); //Fade in the active content
+		return false;
+	});
+
+});
+</script>
+<script>
+	$('#tab1').slick({
+		autoplay: true,
+		autoplaySpeed:5000,
+		slidesToShow: 1,
+		slidesToScroll: 1,
+		dots: true,
+		infinite: true,
+		speed: 500,
+		fade: true,
+		cssEase: 'linear'
+	});
+</script>
+<!-- pcvector.net -->	 
+<!-- <script type="text/javascript" src="/templates/pcv/js/pcvector.js"></script> -->
+<!-- pcvector.net -->
+</body>
+</html>
